@@ -18,7 +18,7 @@ public class HelloWorldController {
     @Value("${spring.profiles.active}")
     private String environment;
 
-    @Value("${username}")
+    @Value("${name}")
     private String username;
 
     @GetMapping("/")
