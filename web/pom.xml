@@ -36,6 +36,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>*.properties</include>
+                    <include>props/*.properties</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
