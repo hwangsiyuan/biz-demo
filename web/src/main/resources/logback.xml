@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <property resource="props/logback.properties" />
+    <!--属性定义-->
+    <property name="LOG_NAME" value="${log.path}/biz-demo" />
+    <property name="LOG_KEEP_DAY" value="${log.keep.day}" />
+    <property name="APPNAME" value="${log.name}" />
+
+    <!--控制台输出-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%X{requestId}] %logger{20}:%line - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--文件输出-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">　　　　　　　　　　　　
+        <file>${LOG_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">　　　　　　　　　　　　
+            <fileNamePattern>${LOG_NAME}-%d{yyyy-MM-dd}.log.zip</fileNamePattern>　　　　　　　　　　　　　
+            <maxHistory>${LOG_KEEP_DAY}</maxHistory>　　　　　　　　　　　
+        </rollingPolicy>　　　　　
+        <encoder>　　　　　　　　　　　
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%X{requestId}] %logger{20}:%line - %msg%n</pattern>　　　　　　　　　　　
+            <charset>UTF-8</charset>
+        </encoder>　　
+    </appender>
+
+    <!--主日志级别-->
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+    <!--包日志级别-->
+    <logger name="com.ibatis" level="debug"/>
+    <logger name="java.sql" level="debug"/>
+
+</configuration>
